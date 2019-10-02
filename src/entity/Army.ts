@@ -14,10 +14,10 @@ export class Army extends ArmyDto {
   @prop()
   active: boolean;
 
-  static create = (rawArmy: ArmyDto): Army => {
+  static create = (armyDto: ArmyDto): Army => {
     const army = new Army();
 
-    Object.entries(rawArmy).forEach(([key, value]) => {
+    Object.entries(armyDto).forEach(([key, value]) => {
       army[key] = value;
     });
 

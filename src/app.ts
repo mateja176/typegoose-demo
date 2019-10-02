@@ -31,9 +31,9 @@ export const createApp = (): express.Express => {
     async (req: Request<ArmyDto>, res, next) => {
       const { headers } = req;
       if (!Object.keys(headers).includes('authorization')) {
-        const { body } = req;
+        const { body: armyDto } = req;
 
-        const { name, squadCount } = body;
+        const { name, squadCount } = armyDto;
 
         // TODO validate args
         if (isNil(name) || isNil(squadCount)) {
@@ -44,7 +44,7 @@ export const createApp = (): express.Express => {
           });
         }
 
-        await ArmyModel.create({ ...body, active: true });
+        await ArmyModel.create({ ...armyDto, active: true });
 
         const activeArmies = await ArmyModel.find({ active: true });
 
