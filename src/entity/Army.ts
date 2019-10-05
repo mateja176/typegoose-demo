@@ -8,23 +8,13 @@ export class ArmyDto {
   squadCount: number;
 }
 
-export class Army extends ArmyDto {
-  id: string;
-
+export class ArmyStruct extends ArmyDto {
   @prop()
   active: boolean;
+}
 
-  static create = (armyDto: ArmyDto): Army => {
-    const army = new Army();
-
-    Object.entries(armyDto).forEach(([key, value]) => {
-      army[key] = value;
-    });
-
-    army.active = true;
-
-    return army;
-  };
+export class Army extends ArmyStruct {
+  id: string;
 }
 
 export const ArmySerialized = Army;
