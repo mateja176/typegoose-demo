@@ -1,6 +1,5 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
-import { isNil } from 'lodash';
 import * as passport from 'passport';
 import { jwtSecret } from './config/jwt';
 import { ArmyDto, ArmyModel } from './entity/Army';
@@ -33,24 +32,19 @@ export const createApp = (): express.Express => {
       if (!Object.keys(headers).includes('authorization')) {
         const { body: armyDto } = req;
 
-        const { name, squadCount } = armyDto;
+        try {
+          // TODO serialize army
+          const army = await ArmyModel.create({ ...armyDto, active: true });
 
-        // TODO validate args
-        if (isNil(name) || isNil(squadCount)) {
+          const activeArmies = await ArmyModel.find({ active: true });
+
+          const token = jwt.sign({ army }, jwtSecret);
+          return res.json({ token, armies: activeArmies });
+        } catch (error) {
           res.status(400);
 
-          return res.json({
-            error: '"name" and "squadCount" parameters are required',
-          });
+          res.json(error);
         }
-
-        // TODO serialize army
-        const army = await ArmyModel.create({ ...armyDto, active: true });
-
-        const activeArmies = await ArmyModel.find({ active: true });
-
-        const token = jwt.sign({ army }, jwtSecret);
-        return res.json({ token, armies: activeArmies });
       }
 
       return next();
