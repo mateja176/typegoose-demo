@@ -1,4 +1,4 @@
-import { prop, Typegoose } from '@typegoose/typegoose';
+import { getModelForClass, prop } from '@typegoose/typegoose';
 
 export class ArmyDto {
   @prop()
@@ -27,8 +27,6 @@ export class Army extends ArmyDto {
   };
 }
 
-export class ArmyEntity extends Typegoose {}
-
 export const ArmySerialized = Army;
 
-export const ArmyModel = new ArmyEntity().getModelForClass(ArmyEntity);
+export const ArmyModel = getModelForClass(Army);
