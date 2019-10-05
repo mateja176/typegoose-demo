@@ -44,11 +44,12 @@ export const createApp = (): express.Express => {
           });
         }
 
-        await ArmyModel.create({ ...armyDto, active: true });
+        // TODO serialize army
+        const army = await ArmyModel.create({ ...armyDto, active: true });
 
         const activeArmies = await ArmyModel.find({ active: true });
 
-        const token = jwt.sign({ army: { name, squadCount } }, jwtSecret);
+        const token = jwt.sign({ army }, jwtSecret);
         return res.json({ token, armies: activeArmies });
       }
 
