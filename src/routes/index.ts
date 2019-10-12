@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as HttpStatus from 'http-status-codes';
 import * as jwt from 'jsonwebtoken';
 import * as MongoQS from 'mongo-querystring';
 import { authenticate } from '../auth';
@@ -37,9 +38,9 @@ router.post(
         const token = jwt.sign({ army }, jwtSecret);
         return res.json({ token, armies: activeArmies });
       } catch (error) {
-        res.status(400);
+        res.status(HttpStatus.BAD_REQUEST);
 
-        res.json(error);
+        res.json({ error });
       }
     }
 
