@@ -18,4 +18,3 @@ passport.use(
 );
 
 export const authenticate = passport.authenticate('jwt', { session: false });
-
