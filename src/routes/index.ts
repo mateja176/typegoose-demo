@@ -1,9 +1,12 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
+import * as MongoQS from 'mongo-querystring';
 import { authenticate } from '../auth';
 import { jwtSecret } from '../config/jwt';
 import { ArmyDto, ArmyModel } from '../entity/Army';
 import { Request } from '../models';
+
+const qs = new MongoQS();
 
 export const router = express.Router();
 
@@ -51,7 +54,9 @@ router.post(
 );
 
 router.get('/armies', authenticate, async (req, res) => {
-  const armies = await ArmyModel.find();
+  const query = qs.parse(req.query);
+
+  const armies = await ArmyModel.find(query);
 
   res.json(armies);
 });

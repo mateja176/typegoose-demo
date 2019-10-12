@@ -3786,6 +3786,11 @@ mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1:
   dependencies:
     minimist "0.0.8"
 
+mongo-querystring@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/mongo-querystring/-/mongo-querystring-4.1.1.tgz#4824ea917fbda8128730ab4bc9b2dd4f7275c471"
+  integrity sha1-SCTqkX+9qBKHMKtLybLdT3J1xHE=
+
 mongodb-memory-server-core@5.2.3:
   version "5.2.3"
   resolved "https://registry.yarnpkg.com/mongodb-memory-server-core/-/mongodb-memory-server-core-5.2.3.tgz#8c638ffc6052aba2eb82005d12811d854db92e20"
