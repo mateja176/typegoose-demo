@@ -4,6 +4,7 @@ export class ArmyDto {
   @prop({
     unique: true,
     minlength: 1,
+    required: true,
   })
   name: string;
 
@@ -11,11 +12,12 @@ export class ArmyDto {
     min: 0,
     max: 100,
     validate: Number.isInteger,
+    required: true,
   })
   squadCount: number;
 }
 
-export class Army {
+export class Army extends ArmyDto {
   id: string;
 
   @prop()
