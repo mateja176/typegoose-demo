@@ -1,10 +1,9 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
-import * as passport from 'passport';
+import { authenticate } from './auth';
 import { jwtSecret } from './config/jwt';
 import { ArmyDto, ArmyModel } from './entity/Army';
 import { Request } from './models';
-import { passportInit } from './passport/init';
 
 export const createApp = (): express.Express => {
   const app = express();
@@ -22,8 +21,6 @@ export const createApp = (): express.Express => {
       console.log('closed');
     });
   });
-
-  const authenticate = passportInit(passport);
 
   app.post(
     '/join',
