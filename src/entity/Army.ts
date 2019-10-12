@@ -1,20 +1,25 @@
 import { getModelForClass, prop } from '@typegoose/typegoose';
 
 export class ArmyDto {
-  @prop()
+  @prop({
+    unique: true,
+    minlength: 1,
+  })
   name: string;
 
-  @prop()
+  @prop({
+    min: 0,
+    max: 100,
+    validate: Number.isInteger,
+  })
   squadCount: number;
 }
 
-export class ArmyStruct extends ArmyDto {
+export class Army {
+  id: string;
+
   @prop()
   active: boolean;
-}
-
-export class Army extends ArmyStruct {
-  id: string;
 }
 
 export const ArmySerialized = Army;
