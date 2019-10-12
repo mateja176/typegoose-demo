@@ -6,7 +6,7 @@ export const createApp = (): express.Express => {
 
   app.use(express.json());
 
-  app.use(router);
+  app.use('/api', router);
 
   return app;
 };
